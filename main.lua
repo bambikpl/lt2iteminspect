@@ -18,6 +18,16 @@ local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "ItemImageGrid"
 ScreenGui.Parent = CoreGui -- Parent to CoreGui
 
+
+-- Create a frame to hold the grid
+local Frame = Instance.new("Frame")
+Frame.Size = UDim2.new(0.8, 0, 0.8, 0) -- 80% of the screen size
+Frame.Position = UDim2.new(0.1, 0, 0.1, 0) -- Centered
+Frame.AnchorPoint = Vector2.new(0.5, 0.5) -- Center the frame
+Frame.Position = UDim2.new(0.5, 0, 0.5, 0) -- Center the frame
+Frame.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
+Frame.Parent = ScreenGui
+
 -- Create a refresh button
 local RefreshButton = Instance.new("TextButton")
 RefreshButton.Size = UDim2.new(0, 100, 0, 30)
@@ -28,12 +38,6 @@ RefreshButton.BackgroundColor3 = Color3.new(0, 0.5, 0.5)
 RefreshButton.BorderSizePixel = 0
 RefreshButton.Parent = Frame
 
--- Function to refresh the comparison
-RefreshButton.MouseButton1Click:Connect(function()
-    local savedItems = loadItems()
-    compareItems(savedItems)
-end)
-
 -- Create a save button
 local SaveButton = Instance.new("TextButton")
 SaveButton.Size = UDim2.new(0, 100, 0, 30)
@@ -43,15 +47,6 @@ SaveButton.TextColor3 = Color3.new(1, 1, 1)
 SaveButton.BackgroundColor3 = Color3.new(0, 0.5, 0)
 SaveButton.BorderSizePixel = 0
 SaveButton.Parent = Frame
-
--- Create a frame to hold the grid
-local Frame = Instance.new("Frame")
-Frame.Size = UDim2.new(0.8, 0, 0.8, 0) -- 80% of the screen size
-Frame.Position = UDim2.new(0.1, 0, 0.1, 0) -- Centered
-Frame.AnchorPoint = Vector2.new(0.5, 0.5) -- Center the frame
-Frame.Position = UDim2.new(0.5, 0, 0.5, 0) -- Center the frame
-Frame.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
-Frame.Parent = ScreenGui
 
 -- Create a close button
 local CloseButton = Instance.new("TextButton")
@@ -375,6 +370,11 @@ local function compareItems(savedItems)
         end
     end
 end
+-- Function to refresh the comparison
+RefreshButton.MouseButton1Click:Connect(function()
+    local savedItems = loadItems()
+    compareItems(savedItems)
+end)
 
 -- Load saved items and compare them when the script runs
 local savedItems = loadItems()
